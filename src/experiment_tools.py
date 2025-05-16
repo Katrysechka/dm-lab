@@ -4,12 +4,7 @@ import numpy as np
 
 
 def monte_carlo_characteristic(
-    dist,
-    graph_type,
-    char_func,
-    graph_param,
-    n_samples,
-    n_iter
+    dist, graph_type, char_func, graph_param, n_samples, n_iter
 ):
     values = []
     for _ in range(n_iter):
