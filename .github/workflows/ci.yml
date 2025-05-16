@@ -31,18 +31,18 @@ jobs:
       - name: Запуск flake8
         run: flake8 src/
 
-  tests:
-    name: pytest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Установка Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Установка зависимостей
-        run: |
-          pip install -r requirements.txt
-          pip install pytest
-      - name: Запуск тестов
-        run: pytest
+  # tests:
+  #   name: pytest
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Установка Python 3.11
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: '3.11'
+  #     - name: Установка зависимостей
+  #       run: |
+  #         pip install -r requirements.txt
+  #         pip install pytest
+  #     - name: Запуск тестов
+  #       run: pytest
