@@ -9,6 +9,6 @@ def generate_sample(dist: str, size: int, seed: int = None) -> np.ndarray:
     }
 
     if dist not in generators:
-        raise ValueError(f"unknown dist: {dist}")
+        raise ValueError(f"Unknown dist: {dist}")
     
     return generators[dist]()
