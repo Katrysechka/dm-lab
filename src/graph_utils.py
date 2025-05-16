@@ -7,7 +7,7 @@ def build_knn_graph(data: np.ndarray, k: int) -> dict:
     dist_matrix = np.abs(data.reshape(-1, 1) - data.reshape(1, -1))
 
     for i in range(n):
-        neighbors = np.argsort(dist_matrix[i])[1 : k + 1]  # k ближайших
+        neighbors = np.argsort(dist_matrix[i])[1:k + 1]  # k ближайших
         for j in neighbors:  # неориентированный граф
             G[i].add(j)
             G[j].add(i)
