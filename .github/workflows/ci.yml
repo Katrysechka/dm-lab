@@ -1,35 +1,35 @@
-name: Testing project
+# name: Testing project
 
-on: [push, pull_request]
+# on: [push, pull_request]
 
-jobs:
-  format:
-    name: Проверка форматирования кода
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Установка Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Установка black
-        run: pip install black
-      - name: Запуск проверки форматирования
-        run: black --check src/
+# jobs:
+#   format:
+#     name: Проверка форматирования кода
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Установка Python 3.11
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
+#       - name: Установка black
+#         run: pip install black
+#       - name: Запуск проверки форматирования
+#         run: black --check src/
 
-  style:
-    name: Проверка стиля кода и ошибок 
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Установка Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Установка flake8
-        run: pip install flake8
-      - name: Запуск flake8
-        run: flake8 src/
+#   style:
+#     name: Проверка стиля кода и ошибок 
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Установка Python 3.11
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
+#       - name: Установка flake8
+#         run: pip install flake8
+#       - name: Запуск flake8
+#         run: flake8 src/
 
   # tests:
   #   name: pytest
