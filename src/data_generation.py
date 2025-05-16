@@ -12,3 +12,4 @@ def generate_sample(dist: str, size: int, seed: int = None) -> np.ndarray:
         raise ValueError(f"Unknown dist: {dist}")
 
     return generators[dist]()
+
