@@ -5,6 +5,9 @@ from src.graph_utils import (
     max_degree,
     max_independent_set_size,
 )
+import sys
+
+sys.path.append("..")
 
 
 def test_build_knn_graph_structure():
