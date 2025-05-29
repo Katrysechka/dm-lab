@@ -1,9 +1,9 @@
-import numpy as np
-import pytest
-from src.data_generation import generate_sample
 import sys
 
 sys.path.append("..")
+import numpy as np
+import pytest
+from ..src.data_generation import generate_sample
 
 
 def test_t3_sample_length_and_type():

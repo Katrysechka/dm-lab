@@ -1,13 +1,13 @@
+import sys
+
+sys.path.append("..")
 import numpy as np
-from src.graph_utils import (
+from ..src.graph_utils import (
     build_knn_graph,
     build_distance_graph,
     max_degree,
     max_independent_set_size,
 )
-import sys
-
-sys.path.append("..")
 
 
 def test_build_knn_graph_structure():
