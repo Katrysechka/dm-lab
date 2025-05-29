@@ -26,6 +26,10 @@ def build_distance_graph(data: np.ndarray, d: float) -> dict:
     return G
 
 
+def max_degree(G: dict) -> int:
+    return max(len(neigh) for neigh in G.values())
+
+
 def chromatic_number_interval_graph(data: np.ndarray, d: float) -> int:
     intervals = [(x - d, x + d) for x in data]
     endpoints = []
