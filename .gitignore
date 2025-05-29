@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Reports and LaTeX intermediate files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# PDF output
+report/*.pdf
+
+# Figures and auto-generated outputs
+report/figures/*.pdf
+report/figures/*.png
+
+# Test cache
+.pytest_cache/
+.cache/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Notebook metadata
+notebooks/__pycache__/
+notebooks/.ipynb_checkpoints/
+
+# Ignore experiment outputs
+*.npy
+*.npz
+*.csv
