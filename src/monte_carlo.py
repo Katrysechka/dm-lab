@@ -14,6 +14,7 @@ from .graph_utils import (
 )
 from .data_generation import generate_sample
 
+
 def run_monte_carlo(
     sample_size: int, num_runs: int, graph_kind: str, graph_param: float
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
