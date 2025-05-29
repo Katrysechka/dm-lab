@@ -1,0 +1,14 @@
+numpy
+scipy
+pandas
+matplotlib
+seaborn
+networkx
+scikit-learn
+tqdm
+
+jupyter
+
+pytest
+flake8
+black
