@@ -8,7 +8,7 @@ from .graph_utils import (
     chromatic_number_interval_graph,
     num_connected_components,
 )
-from .data_generation import sample_h0, sample_h1
+from .data_generation import generate_sample
 
 
 def simulate_statistics(
@@ -23,8 +23,8 @@ def simulate_statistics(
     stats0 = []
     stats1 = []
     for t in range(trials):
-        sample0 = sample_h0(n, seed=t)
-        sample1 = sample_h1(n, seed=t)
+        sample0 = generate_sample("gamma", size=n, seed=seed)
+        sample1 = generate_sample("exp", size=n, seed=seed)
 
         if graph_type == "knn":
             graph0 = build_knn_graph(sample0, int(param))
