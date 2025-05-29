@@ -1,3 +1,7 @@
+"""
+Модуль simulator: Монте-Карло симуляции графовых характеристик для Gamma и Exp распределений.
+"""
+
 import numpy as np
 import pandas as pd
 
@@ -10,50 +14,59 @@ from .graph_utils import (
 )
 from .data_generation import generate_sample
 
-
-def simulate_statistics(
-    n: int, trials: int, graph_type: str, param: float
+def run_monte_carlo(
+    sample_size: int, num_runs: int, graph_kind: str, graph_param: float
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
-    Для trials симуляций генерируем два набора выборок:
-    H0 ~ Gamma(1/2, λ0=√0.5) и H1 ~ Exp(λ0=1), строим граф указанного типа,
-    вычисляем характеристики (число компонент и хроматическое число/макс степень)
-    и возвращаем два DataFrame: по одному для H0 и H1 (trials × 2).
+    Проводит num_runs экспериментов с генерацией выборок из H0 и H1,
+    построением графа указанного типа и вычислением статистик.
+
+    Параметры:
+    - sample_size: количество точек в каждой выборке
+    - num_runs: сколько раз повторять эксперимент
+    - graph_kind: "knn" или "dist"
+    - graph_param: параметр построения графа (k или d)
+
+    Возвращает:
+    - два DataFrame (H0 и H1), где строки — отдельные симуляции
     """
-    stats0 = []
-    stats1 = []
-    for t in range(trials):
-        sample0 = generate_sample("gamma", size=n, seed=seed)
-        sample1 = generate_sample("exp", size=n, seed=seed)
+    results_h0 = []
+    results_h1 = []
 
-        if graph_type == "knn":
-            graph0 = build_knn_graph(sample0, int(param))
-            graph1 = build_knn_graph(sample1, int(param))
-            row0 = {
-                "num_components": num_connected_components(graph0),
-                "max_degree": max_degree(graph0),
+    for i in range(num_runs):
+        data_h0 = generate_sample("gamma", size=sample_size, seed=i)
+        data_h1 = generate_sample("exp", size=sample_size, seed=i)
+
+        if graph_kind == "knn":
+            g0 = build_knn_graph(data_h0, int(graph_param))
+            g1 = build_knn_graph(data_h1, int(graph_param))
+
+            res0 = {
+                "components": num_connected_components(g0),
+                "max_deg": max_degree(g0),
             }
-            row1 = {
-                "num_components": num_connected_components(graph1),
-                "max_degree": max_degree(graph1),
+            res1 = {
+                "components": num_connected_components(g1),
+                "max_deg": max_degree(g1),
             }
 
-        elif graph_type == "dist":
-            graph0 = build_distance_graph(sample0, param)
-            graph1 = build_distance_graph(sample1, param)
-            row0 = {
-                "num_components": num_connected_components(graph0),
-                "chromatic_number": chromatic_number_interval_graph(sample0, param),
+        elif graph_kind == "dist":
+            g0 = build_distance_graph(data_h0, graph_param)
+            g1 = build_distance_graph(data_h1, graph_param)
+
+            res0 = {
+                "components": num_connected_components(g0),
+                "chrom_num": chromatic_number_interval_graph(data_h0, graph_param),
             }
-            row1 = {
-                "num_components": num_connected_components(graph1),
-                "chromatic_number": chromatic_number_interval_graph(sample1, param),
+            res1 = {
+                "components": num_connected_components(g1),
+                "chrom_num": chromatic_number_interval_graph(data_h1, graph_param),
             }
 
         else:
-            raise ValueError(f"Unknown graph_type={graph_type!r}")
+            raise RuntimeError(f"Тип графа '{graph_kind}' не поддерживается")
 
-        stats0.append(row0)
-        stats1.append(row1)
+        results_h0.append(res0)
+        results_h1.append(res1)
 
-    return pd.DataFrame(stats0), pd.DataFrame(stats1)
+    return pd.DataFrame(results_h0), pd.DataFrame(results_h1)

@@ -1,7 +1,3 @@
-"""
-Модуль hypothesis_generators: генераторы выборок для H0 (Gamma) и H1 (Exponential).
-"""
-
 import numpy as np
 
 
