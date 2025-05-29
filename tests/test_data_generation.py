@@ -46,11 +46,13 @@ def test_normal_sample_statistics():
     assert abs(mean) < 0.01, f"Среднее нормальное не близко к 0: {mean}"
     assert abs(std - 1.0) < 0.01, f"Ст. отклонение нормального не ≈ 1: {std}"
 
+
 def test_gamma_sample_length_and_type():
     """Генерация gamma: правильный размер и тип."""
     x = generate_sample("gamma", alpha=2.0, size=100, seed=42)
     assert isinstance(x, np.ndarray), "Ожидался numpy.ndarray"
     assert x.shape == (100,), "Ожидалась форма (100,)"
+
 
 def test_gamma_sample_statistics():
     """Gamma: среднее и стандартное отклонение разумны."""
@@ -60,11 +62,13 @@ def test_gamma_sample_statistics():
     assert mean > 0, f"Среднее gamma должно быть положительным: {mean}"
     assert std > 0, f"Ст. отклонение gamma должно быть положительным: {std}"
 
+
 def test_exp_sample_length_and_type():
     """Генерация exponential: правильный размер и тип."""
     x = generate_sample("exp", alpha=1.0, size=100, seed=123)
     assert isinstance(x, np.ndarray), "Ожидался numpy.ndarray"
     assert x.shape == (100,), "Ожидалась форма (100,)"
+
 
 def test_exp_sample_statistics():
     """Exponential: среднее ≈ alpha, стандартное отклонение ≈ alpha."""

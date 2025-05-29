@@ -24,6 +24,8 @@ def build_distance_graph(data: np.ndarray, d: float) -> dict:
                 G[i].add(j)
                 G[j].add(i)
     return G
+
+
 def chromatic_number_interval_graph(data: np.ndarray, d: float) -> int:
     intervals = [(x - d, x + d) for x in data]
     endpoints = []
@@ -61,6 +63,7 @@ def num_connected_components(G: dict) -> int:
             count += 1
 
     return count
+
 
 def max_degree(G: dict) -> int:  # Максимальная степень вершины графа
     return max(len(neigh) for neigh in G.values())
